@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cummins Parts Shipment - Customer Feedback</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-area">
+                <svg class="logo" viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0" y="8" width="6" height="24" fill="#C8102E" rx="1"/>
+                    <text x="14" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="700" fill="white" letter-spacing="2">CUMMINS</text>
+                </svg>
+                <span class="app-title">Shipment Quality Feedback</span>
+            </div>
+            <nav>
+                <button class="nav-btn active" data-view="form-view">Submit Feedback</button>
+                <button class="nav-btn" data-view="dashboard-view">Dashboard</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Submit Feedback View -->
+        <section id="form-view" class="view active">
+            <div class="container">
+                <div class="form-header">
+                    <h1>Report a Shipment Issue</h1>
+                    <p>Help us improve by reporting any issues with your Cummins parts shipment. All feedback types are welcome — not just RGAs.</p>
+                </div>
+
+                <form id="feedback-form" novalidate>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="customerName">Customer Name <span class="required">*</span></label>
+                            <input type="text" id="customerName" name="customerName" required placeholder="Your full name">
+                            <span class="error-msg"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Company <span class="required">*</span></label>
+                            <select id="company" name="company" required>
+                                <option value="">Select company...</option>
+                                <option value="Stellantis">Stellantis</option>
+                                <option value="PACCAR">PACCAR</option>
+                                <option value="Daimler">Daimler</option>
+                                <option value="Volvo">Volvo</option>
+                                <option value="Navistar">Navistar</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <span class="error-msg"></span>
+                        </div>
+
+                        <div class="form-group" id="otherCompanyGroup" style="display:none;">
+                            <label for="otherCompany">Company Name <span class="required">*</span></label>
+                            <input type="text" id="otherCompany" name="otherCompany" placeholder="Enter company name">
+                            <span class="error-msg"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="partNumber">Part Number <span class="required">*</span></label>
+                            <input type="text" id="partNumber" name="partNumber" required placeholder="e.g., 3802429">
+                            <span class="error-msg"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shipmentRef">Order / Shipment Reference <span class="required">*</span></label>
+                            <input type="text" id="shipmentRef" name="shipmentRef" required placeholder="e.g., SO-2024-00123">
+                            <span class="error-msg"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category">Defect Category <span class="required">*</span></label>
+                            <select id="category" name="category" required>
+                                <option value="">Select category...</option>
+                                <option value="damaged">Damaged in Transit</option>
+                                <option value="wrong-part">Wrong Part Shipped</option>
+                                <option value="missing-parts">Missing Parts</option>
+                                <option value="labeling-issue">Labeling / Marking Issue</option>
+                                <option value="packaging-issue">Packaging Issue</option>
+                                <option value="quantity-discrepancy">Quantity Discrepancy</option>
+                                <option value="contamination">Contamination / Foreign Material</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <span class="error-msg"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dateOfIssue">Date of Issue <span class="required">*</span></label>
+                            <input type="date" id="dateOfIssue" name="dateOfIssue" required>
+                            <span class="error-msg"></span>
+                        </div>
+
+                        <div class="form-group severity-group">
+                            <label>Severity <span class="required">*</span></label>
+                            <div class="radio-group">
+                                <label class="radio-label severity-low">
+                                    <input type="radio" name="severity" value="low"> Low
+                                </label>
+                                <label class="radio-label severity-medium">
+                                    <input type="radio" name="severity" value="medium"> Medium
+                                </label>
+                                <label class="radio-label severity-high">
+                                    <input type="radio" name="severity" value="high"> High
+                                </label>
+                                <label class="radio-label severity-critical">
+                                    <input type="radio" name="severity" value="critical"> Critical
+                                </label>
+                            </div>
+                            <span class="error-msg"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="description">Description <span class="required">*</span></label>
+                        <textarea id="description" name="description" required rows="4" placeholder="Describe the issue in detail (minimum 20 characters)..."></textarea>
+                        <span class="error-msg"></span>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Photo Evidence</label>
+                        <div class="upload-zone" id="uploadZone">
+                            <div class="upload-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5">
+                                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                                    <polyline points="17 8 12 3 7 8"/>
+                                    <line x1="12" y1="3" x2="12" y2="15"/>
+                                </svg>
+                            </div>
+                            <p>Drag & drop photos here or <span class="upload-link">browse files</span></p>
+                            <p class="upload-hint">Max 3 images, 5 MB each (JPG, PNG, WEBP)</p>
+                            <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp" multiple style="display:none;">
+                        </div>
+                        <div class="photo-previews" id="photoPreviews"></div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                        <button type="reset" class="btn btn-secondary">Clear Form</button>
+                    </div>
+                </form>
+
+                <div id="successToast" class="toast" style="display:none;">
+                    <span class="toast-icon">&#10003;</span>
+                    <span class="toast-msg">Feedback submitted successfully! Thank you for helping us improve.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard View -->
+        <section id="dashboard-view" class="view">
+            <div class="container">
+                <div class="dashboard-header">
+                    <h1>Feedback Dashboard</h1>
+                    <div class="dashboard-actions">
+                        <button class="btn btn-secondary btn-sm" id="exportCsvBtn">Export CSV</button>
+                        <button class="btn btn-secondary btn-sm" id="clearAllBtn">Clear All Data</button>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <label for="filterDateFrom">From</label>
+                        <input type="date" id="filterDateFrom">
+                    </div>
+                    <div class="filter-group">
+                        <label for="filterDateTo">To</label>
+                        <input type="date" id="filterDateTo">
+                    </div>
+                    <div class="filter-group">
+                        <label for="filterCompany">Company</label>
+                        <select id="filterCompany">
+                            <option value="">All</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filterCategory">Category</label>
+                        <select id="filterCategory">
+                            <option value="">All</option>
+                            <option value="damaged">Damaged</option>
+                            <option value="wrong-part">Wrong Part</option>
+                            <option value="missing-parts">Missing Parts</option>
+                            <option value="labeling-issue">Labeling</option>
+                            <option value="packaging-issue">Packaging</option>
+                            <option value="quantity-discrepancy">Quantity</option>
+                            <option value="contamination">Contamination</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="totalOpportunities">Total Shipments (for DPMO)</label>
+                        <input type="number" id="totalOpportunities" value="10000" min="1" placeholder="Total parts shipped">
+                    </div>
+                    <div class="filter-group filter-actions">
+                        <button class="btn btn-primary btn-sm" id="applyFiltersBtn">Apply</button>
+                        <button class="btn btn-secondary btn-sm" id="resetFiltersBtn">Reset</button>
+                    </div>
+                </div>
+
+                <!-- Summary Cards -->
+                <div class="summary-cards" id="summaryCards">
+                    <div class="card">
+                        <div class="card-label">Total Submissions</div>
+                        <div class="card-value" id="totalSubmissions">0</div>
+                    </div>
+                    <div class="card card-dpmo">
+                        <div class="card-label">DPMO</div>
+                        <div class="card-value" id="dpmoValue">0</div>
+                        <div class="card-sub" id="dpmoSigma"></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-label">Top Defect Category</div>
+                        <div class="card-value card-value-sm" id="topCategory">-</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-label">Critical / High</div>
+                        <div class="card-value" id="criticalHighCount">0</div>
+                    </div>
+                </div>
+
+                <!-- Category Breakdown -->
+                <div class="category-breakdown" id="categoryBreakdown">
+                    <h2>Defect Category Breakdown</h2>
+                    <div class="bar-chart" id="barChart"></div>
+                </div>
+
+                <!-- Feedback Table -->
+                <div class="table-wrapper">
+                    <h2>Feedback Records</h2>
+                    <table class="feedback-table" id="feedbackTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Company</th>
+                                <th>Part Number</th>
+                                <th>Category</th>
+                                <th>Severity</th>
+                                <th>Description</th>
+                                <th>Photos</th>
+                            </tr>
+                        </thead>
+                        <tbody id="feedbackTableBody">
+                        </tbody>
+                    </table>
+                    <div class="empty-state" id="emptyState" style="display:none;">
+                        <p>No feedback records yet. Submit your first report!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Photo Lightbox -->
+    <div class="lightbox" id="lightbox" style="display:none;">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close">&times;</button>
+            <img id="lightboxImg" src="" alt="Photo evidence">
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Cummins Inc. &mdash; Shipment Quality Feedback Portal</p>
+        </div>
+    </footer>
+
+    <script src="js/storage.js"></script>
+    <script src="js/form.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
